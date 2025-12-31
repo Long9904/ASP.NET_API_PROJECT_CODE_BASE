@@ -6,4 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Mapping\" />
+    <Folder Include="Common\Results\" />
+    <Folder Include="Common\Opions\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Features\Auth\Login\" />
+    <Folder Include="Features\Auth\Logout\" />
+    <Folder Include="Features\Auth\RefreshToken\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
 </Project>
