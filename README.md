@@ -1,45 +1,68 @@
-ASP.NET Core API Base Project
+# 🚀 ASP.NET Core API Base Project
 
 A clean and scalable base project for building APIs with .NET 8.
 
-Note: This project is currently in the early stages of development. Contributions and feedback are highly appreciated to help improve its stability and features.
+> **Note:** This project is currently in the early stages of development. Contributions and feedback are highly appreciated to help improve its stability and features.
 
 ---
 
-Technologies & Architectures
-Architecture: Clean Architecture
+## 🏗️ Technologies & Architectures
 
-Framework: .NET 8.0
+### Architecture
 
-Database: PostgreSQL
+- **Clean Architecture**
 
-Libraries & Patterns: - MediatR: In-process messaging for CQRS.
+### Framework
 
-FluentValidation: Strong-typed validation rules.
+- **.NET 8.0**
 
-Components: Custom Middleware for Global Exception Handling.
+### Database
+
+- **PostgreSQL**
+
+### Libraries & Patterns
+
+- **MediatR:** In-process messaging for CQRS
+- **FluentValidation:** Strong-typed validation rules
+
+### Components
+
+- **Custom Middleware** for Global Exception Handling
 
 ---
 
-🛠 Prerequisites
-IDE: Visual Studio 2022 (version 17.8+)
+## 🛠️ Prerequisites
 
-SDK: .NET 8 SDK
-
-Database: PostgreSQL instance
+| Component       | Requirement                        |
+| --------------- | ---------------------------------- |
+| 💻 **IDE**      | Visual Studio 2022 (version 17.8+) |
+| 📦 **SDK**      | .NET 8 SDK                         |
+| 🗄️ **Database** | PostgreSQL instance                |
 
 ---
 
-V1: 31/12/2025: DB Connection
+## 📋 Version History
 
-- To use database, create file: appsettings.Development.json in Net_8.0_Projects
-- The project setting for postgresql
+### V1: 31/12/2025 - Database Connection
 
-- Add connection string:
-  "ConnectionStrings": {
-  "DefaultConnection": "Host=localhost;Port=5432;Database=YourDBSchemaName;Username=postgres;Password=YourPassword"
-  }
+#### 🔧 Setup Instructions
 
-- Open Pakage Manager Console: Tools - Nuget Pakage Manager
-- Choose Default project: Infrastructure
-- Type: Update-Database and Enter
+1. **Create Configuration File**
+
+   - 📄 Create file: `appsettings.Development.json` in `Net_8.0_Projects` directory
+   - ⚙️ The project setting for PostgreSQL
+
+2. **Add Connection String**
+
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Host=localhost;Port=5432;Database=YourDBSchemaName;Username=postgres;Password=YourPassword"
+     }
+   }
+   ```
+
+3. **Run Database Migration**
+   - 🎯 Open **Package Manager Console**: `Tools` → `NuGet Package Manager` → `Package Manager Console`
+   - 📂 Choose **Default project**: `Infrastructure`
+   - ⌨️ Type: `Update-Database` and press Enter
