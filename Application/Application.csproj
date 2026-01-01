@@ -16,10 +16,10 @@
     <Folder Include="Common\Mapping\" />
     <Folder Include="Common\Results\" />
     <Folder Include="Common\Opions\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Features\Auth\Login\" />
     <Folder Include="Features\Auth\Logout\" />
     <Folder Include="Features\Auth\RefreshToken\" />
+    <Folder Include="Features\User\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 

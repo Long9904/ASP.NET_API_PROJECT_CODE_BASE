@@ -2,6 +2,7 @@ using Domain.Interface.IRepository;
 using Infrastructure;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using NET_8._0_Projects.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
