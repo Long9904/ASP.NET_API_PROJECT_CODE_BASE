@@ -1,6 +1,5 @@
-using Domain.Interface.IRepository;
+using Application;
 using Infrastructure;
-using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using NET_8._0_Projects.Middleware;
 
@@ -18,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Repo DI
 builder.Services.AddInfrastructure();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

@@ -13,14 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Mapping\" />
-    <Folder Include="Common\Results\" />
-    <Folder Include="Common\Opions\" />
+    <Folder Include="Common\Options\" />
     <Folder Include="Features\Auth\Login\" />
     <Folder Include="Features\Auth\Logout\" />
     <Folder Include="Features\Auth\RefreshToken\" />
-    <Folder Include="Features\User\" />
     <Folder Include="Utils\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
   </ItemGroup>
 
 </Project>

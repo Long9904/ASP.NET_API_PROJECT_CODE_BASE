@@ -1,5 +1,6 @@
-﻿using System.Text.Json;
-using Application.Exceptions;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using NET_8._0_Projects.Common;
 
 namespace NET_8._0_Projects.Middleware
 {
@@ -20,30 +21,52 @@ namespace NET_8._0_Projects.Middleware
             {
                 await _next(context);
             }
+            catch (ValidationException ex)
+            {
+                await HandleValidationException(context, ex);
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An unhandled exception has occurred.");
+                _logger.LogError(ex, "Unhandled exception. TraceId: {TraceId}", context.TraceIdentifier);
 
-                context.Response.ContentType = "application/json";
-
-                var message = "An internal server error occurred.";
-                var statusCode = StatusCodes.Status500InternalServerError;
-
-                if (ex is BaseException baseException)
+                var problem = new ApiProblemDetails
                 {
-                    statusCode = baseException.StatusCode;
-                    message = baseException.Message;
-                }
-
-                var response = new
-                {
-                    StatusCode = statusCode,
-                    IsSuccess = false,
-                    Message = message,
+                    Type = "https://errors.myapp.com/internal-server-error",
+                    Title = "Internal Server Error",
+                    Status = 500,
+                    Detail = "An unexpected error occurred",
+                    Instance = context.Request.Path,
+                    ErrorCode = "INTERNAL_SERVER_ERROR",
+                    TraceId = context.TraceIdentifier
                 };
 
-                await context.Response.WriteAsJsonAsync(response);
+                context.Response.StatusCode = 500;
+                context.Response.ContentType = "application/problem+json";
+
+                await context.Response.WriteAsJsonAsync(problem);
             }
+        }
+
+
+        private static async Task HandleValidationException(
+        HttpContext context,
+        ValidationException ex)
+        {
+            var errors = ex.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            var problem = new ValidationProblemDetails(errors)
+            {
+                Title = "Validation failed",
+                Status = StatusCodes.Status400BadRequest
+            };
+
+            context.Response.StatusCode = problem.Status.Value;
+            await context.Response.WriteAsJsonAsync(problem);
         }
     }
 }
